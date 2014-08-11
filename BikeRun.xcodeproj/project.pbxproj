@@ -21,6 +21,10 @@
 		CB40D0B519922D5E003DB27F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40D09719922D5E003DB27F /* UIKit.framework */; };
 		CB40D0BD19922D5E003DB27F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB40D0BB19922D5E003DB27F /* InfoPlist.strings */; };
 		CB40D0BF19922D5E003DB27F /* BikeRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40D0BE19922D5E003DB27F /* BikeRunTests.m */; };
+		CB40D0CA19923447003DB27F /* full_bike_White.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB40D0C919923447003DB27F /* full_bike_White.jpg */; };
+		CB40D0CD1992410F003DB27F /* BRTripConfigurationTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40D0CC1992410F003DB27F /* BRTripConfigurationTVController.m */; };
+		CB9ED51D1998B763000B03D3 /* TripCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */; };
+		CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,12 @@
 		CB40D0BA19922D5E003DB27F /* BikeRunTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BikeRunTests-Info.plist"; sourceTree = "<group>"; };
 		CB40D0BC19922D5E003DB27F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB40D0BE19922D5E003DB27F /* BikeRunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BikeRunTests.m; sourceTree = "<group>"; };
+		CB40D0C919923447003DB27F /* full_bike_White.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = full_bike_White.jpg; sourceTree = "<group>"; };
+		CB40D0CB1992410F003DB27F /* BRTripConfigurationTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTripConfigurationTVController.h; sourceTree = "<group>"; };
+		CB40D0CC1992410F003DB27F /* BRTripConfigurationTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTripConfigurationTVController.m; sourceTree = "<group>"; };
+		CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripCustomCell.xib; sourceTree = "<group>"; };
+		CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTripTableViewCell.h; sourceTree = "<group>"; };
+		CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTripTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +95,7 @@
 				CB40D09919922D5E003DB27F /* BikeRun */,
 				CB40D0B819922D5E003DB27F /* BikeRunTests */,
 				CB40D09219922D5E003DB27F /* Frameworks */,
+				CB40D0C819923414003DB27F /* Images */,
 				CB40D09119922D5E003DB27F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,11 +125,16 @@
 			children = (
 				CB40D0A219922D5E003DB27F /* BRAppDelegate.h */,
 				CB40D0A319922D5E003DB27F /* BRAppDelegate.m */,
-				CB40D0A519922D5E003DB27F /* Main.storyboard */,
+				CB40D0CB1992410F003DB27F /* BRTripConfigurationTVController.h */,
+				CB40D0CC1992410F003DB27F /* BRTripConfigurationTVController.m */,
 				CB40D0A819922D5E003DB27F /* BRViewController.h */,
 				CB40D0A919922D5E003DB27F /* BRViewController.m */,
 				CB40D0AB19922D5E003DB27F /* Images.xcassets */,
+				CB40D0A519922D5E003DB27F /* Main.storyboard */,
 				CB40D09A19922D5E003DB27F /* Supporting Files */,
+				CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */,
+				CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */,
+				CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */,
 			);
 			path = BikeRun;
 			sourceTree = "<group>";
@@ -150,6 +166,14 @@
 				CB40D0BB19922D5E003DB27F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB40D0C819923414003DB27F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				CB40D0C919923447003DB27F /* full_bike_White.jpg */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +256,8 @@
 				CB40D0AC19922D5E003DB27F /* Images.xcassets in Resources */,
 				CB40D09E19922D5E003DB27F /* InfoPlist.strings in Resources */,
 				CB40D0A719922D5E003DB27F /* Main.storyboard in Resources */,
+				CB9ED51D1998B763000B03D3 /* TripCustomCell.xib in Resources */,
+				CB40D0CA19923447003DB27F /* full_bike_White.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +279,8 @@
 				CB40D0AA19922D5E003DB27F /* BRViewController.m in Sources */,
 				CB40D0A419922D5E003DB27F /* BRAppDelegate.m in Sources */,
 				CB40D0A019922D5E003DB27F /* main.m in Sources */,
+				CB40D0CD1992410F003DB27F /* BRTripConfigurationTVController.m in Sources */,
+				CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +485,7 @@
 				CB40D0C419922D5E003DB27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB40D0C519922D5E003DB27F /* Build configuration list for PBXNativeTarget "BikeRunTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +494,7 @@
 				CB40D0C719922D5E003DB27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

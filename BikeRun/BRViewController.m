@@ -9,6 +9,7 @@
 #import "BRViewController.h"
 
 @interface BRViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *img;
 
 @end
 
@@ -18,6 +19,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.img.image = [UIImage imageNamed:@"full_bike_White.jpg"];
 }
 
 - (void)didReceiveMemoryWarning
