@@ -25,6 +25,8 @@
 		CB40D0CD1992410F003DB27F /* BRTripConfigurationTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40D0CC1992410F003DB27F /* BRTripConfigurationTVController.m */; };
 		CB9ED51D1998B763000B03D3 /* TripCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */; };
 		CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */; };
+		CBC33B59199AC1F300874A3F /* BRAddTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC33B58199AC1F300874A3F /* BRAddTripViewController.m */; };
+		CBF4BEF319A4E573005907BF /* sviluppi.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF4BEF219A4E573005907BF /* sviluppi.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,9 @@
 		CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripCustomCell.xib; sourceTree = "<group>"; };
 		CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTripTableViewCell.h; sourceTree = "<group>"; };
 		CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTripTableViewCell.m; sourceTree = "<group>"; };
+		CBC33B57199AC1F300874A3F /* BRAddTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddTripViewController.h; sourceTree = "<group>"; };
+		CBC33B58199AC1F300874A3F /* BRAddTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddTripViewController.m; sourceTree = "<group>"; };
+		CBF4BEF219A4E573005907BF /* sviluppi.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sviluppi.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +97,7 @@
 		CB40D08719922D5E003DB27F = {
 			isa = PBXGroup;
 			children = (
+				CBF4BEF219A4E573005907BF /* sviluppi.txt */,
 				CB40D09919922D5E003DB27F /* BikeRun */,
 				CB40D0B819922D5E003DB27F /* BikeRunTests */,
 				CB40D09219922D5E003DB27F /* Frameworks */,
@@ -135,6 +141,8 @@
 				CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */,
 				CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */,
 				CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */,
+				CBC33B57199AC1F300874A3F /* BRAddTripViewController.h */,
+				CBC33B58199AC1F300874A3F /* BRAddTripViewController.m */,
 			);
 			path = BikeRun;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 				CB40D09E19922D5E003DB27F /* InfoPlist.strings in Resources */,
 				CB40D0A719922D5E003DB27F /* Main.storyboard in Resources */,
 				CB9ED51D1998B763000B03D3 /* TripCustomCell.xib in Resources */,
+				CBF4BEF319A4E573005907BF /* sviluppi.txt in Resources */,
 				CB40D0CA19923447003DB27F /* full_bike_White.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +290,7 @@
 				CB40D0A019922D5E003DB27F /* main.m in Sources */,
 				CB40D0CD1992410F003DB27F /* BRTripConfigurationTVController.m in Sources */,
 				CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */,
+				CBC33B59199AC1F300874A3F /* BRAddTripViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BikeRun/BikeRun-Prefix.pch";
 				INFOPLIST_FILE = "BikeRun/BikeRun-Info.plist";
@@ -418,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BikeRun/BikeRun-Prefix.pch";
 				INFOPLIST_FILE = "BikeRun/BikeRun-Info.plist";

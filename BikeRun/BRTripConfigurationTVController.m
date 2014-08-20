@@ -10,10 +10,15 @@
 #import "BRTripTableViewCell.h"
 
 @interface BRTripConfigurationTVController ()
+- (IBAction)addNewTrip:(id)sender;
+- (IBAction)reloadTable:(id)sender;
 
 @end
 
 @implementation BRTripConfigurationTVController
+{
+    NSMutableArray *contentData;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,7 +37,11 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    contentData = [NSMutableArray arrayWithObjects:@"Corso Racconigi, Torino", @"Corso Francia, Torino", @"Piazza Castello, Torino", nil];
+    self.navigationController.toolbarHidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +54,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
@@ -54,7 +62,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5;
+    return [contentData count];
 }
 
 
@@ -69,34 +77,36 @@
         cell = [nib objectAtIndex:0];
     }
     
-    cell.partenzaLabel.text = @"Corso Francia, Torino";
+    cell.partenzaLabel.text = [contentData objectAtIndex:indexPath.row];
     cell.arrivoLabel.text = @"Corso Racconigi, Torino";
     cell.distanceLabel.text = @"10 Km";
     
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [contentData removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[tableView reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -125,4 +135,12 @@
 }
 */
 
+- (IBAction)addNewTrip:(id)sender {
+    NSLog(@"addNewTrip pressed!");
+}
+
+- (IBAction)reloadTable:(id)sender {
+    NSLog(@"realodTable pressed!");
+    [self.tableView reloadData];
+}
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F6E53936-DB0A-4A41-8F48-EF6795A73273</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BikeRun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A4D953441B59E1D9F975B9EF31B542C28558B7BA</key>
+		<string>https://github.com/andreabianco/BikeRun.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BikeRun.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A4D953441B59E1D9F975B9EF31B542C28558B7BA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/andreabianco/BikeRun.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A4D953441B59E1D9F975B9EF31B542C28558B7BA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A4D953441B59E1D9F975B9EF31B542C28558B7BA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BikeRun</string>
+		</dict>
+	</array>
+</dict>
+</plist>
