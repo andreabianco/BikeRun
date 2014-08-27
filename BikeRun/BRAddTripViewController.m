@@ -9,7 +9,6 @@
 #import "BRAddTripViewController.h"
 
 @interface BRAddTripViewController ()
-- (IBAction)closeModal:(id)sender;
 
 @end
 
@@ -63,7 +62,4 @@
 }
 */
 
-- (IBAction)closeModal:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
-}
 @end

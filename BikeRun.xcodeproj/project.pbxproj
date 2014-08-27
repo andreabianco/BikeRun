@@ -68,6 +68,9 @@
 		CBC33B57199AC1F300874A3F /* BRAddTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddTripViewController.h; sourceTree = "<group>"; };
 		CBC33B58199AC1F300874A3F /* BRAddTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddTripViewController.m; sourceTree = "<group>"; };
 		CBF4BEF219A4E573005907BF /* sviluppi.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sviluppi.txt; sourceTree = "<group>"; };
+		CBF4BEF419ADF3D7005907BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CBF4BEF519ADF3D7005907BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		CBF4BEF619ADF3D7005907BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = CB40D08719922D5E003DB27F;
 			productRefGroup = CB40D09119922D5E003DB27F /* Products */;
@@ -317,6 +321,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB40D09D19922D5E003DB27F /* en */,
+				CBF4BEF419ADF3D7005907BF /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB40D0A619922D5E003DB27F /* Base */,
+				CBF4BEF519ADF3D7005907BF /* it */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB40D0BC19922D5E003DB27F /* en */,
+				CBF4BEF619ADF3D7005907BF /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

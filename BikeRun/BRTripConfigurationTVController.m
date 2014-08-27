@@ -12,6 +12,7 @@
 @interface BRTripConfigurationTVController ()
 - (IBAction)addNewTrip:(id)sender;
 - (IBAction)reloadTable:(id)sender;
+@property (nonatomic, strong) NSString *var1;
 
 @end
 
@@ -42,6 +43,8 @@
     contentData = [NSMutableArray arrayWithObjects:@"Corso Racconigi, Torino", @"Corso Francia, Torino", @"Piazza Castello, Torino", nil];
     self.navigationController.toolbarHidden = NO;
     
+    self.var1 = @"Babane";
+    NSLog(@"viewDidLoad: %@",self.var1);
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,4 +146,12 @@
     NSLog(@"realodTable pressed!");
     [self.tableView reloadData];
 }
+
+- (IBAction)unwindWithoutSave:(UIStoryboardSegue *)unwindSegue
+{
+    NSLog(@"Unwind Segue");
+    NSLog(@"Segue: %@",self.var1);
+}
+
+
 @end
