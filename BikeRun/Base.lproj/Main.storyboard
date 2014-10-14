@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Iaq-oZ-5DQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Iaq-oZ-5DQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,32 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9l3-eA-fqR">
-                                <rect key="frame" x="20" y="308" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Plan trip">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="ySu-TB-iVY" kind="push" id="wRZ-PN-eYi"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjQ-Wu-09C">
                                 <rect key="frame" x="20" y="358" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start trip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Y9-ub-OHy">
                                 <rect key="frame" x="20" y="80" width="280" height="181"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9l3-eA-fqR">
+                                <rect key="frame" x="20" y="308" width="280" height="30"/>
+                                <state key="normal" title="Plan trip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9a3-O0-LGi" kind="push" id="hNd-LB-4U1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="IDk-kM-koc"/>
-                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="img" destination="2Y9-ub-OHy" id="QgI-fE-Mf0"/>
                     </connections>
@@ -50,85 +47,24 @@
             </objects>
             <point key="canvasLocation" x="614" y="130"/>
         </scene>
-        <!--Trip ConfigurationTV Controller - Trip list-->
-        <scene sceneID="ZxU-aX-wBE">
+        <!--Edit Info View Controller-->
+        <scene sceneID="oIj-LJ-U9p">
             <objects>
-                <tableViewController id="ySu-TB-iVY" customClass="BRTripConfigurationTVController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="78" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lyx-DM-ux7">
+                <viewController id="9a3-O0-LGi" customClass="BREditInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zHQ-aX-c6E"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ec4-4P-o1o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XUz-8F-8a0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TripCell" rowHeight="78" id="1Si-cD-ZtG">
-                                <rect key="frame" x="0.0" y="86" width="320" height="78"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Si-cD-ZtG" id="86U-ln-Axc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ySu-TB-iVY" id="X0v-Do-h34"/>
-                            <outlet property="delegate" destination="ySu-TB-iVY" id="sg7-UE-bxS"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" systemItem="add" id="NWZ-kf-pcY">
-                            <connections>
-                                <action selector="addNewTrip:" destination="ySu-TB-iVY" id="6mO-vF-lCb"/>
-                                <segue destination="WX8-WJ-0ks" kind="modal" id="ySH-se-pAg"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="e97-AF-7Wz"/>
-                        <barButtonItem systemItem="refresh" id="mUW-oc-8tg">
-                            <connections>
-                                <action selector="reloadTable:" destination="ySu-TB-iVY" id="Mgm-9R-sK1"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Trip list" id="cSf-am-abd"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xlF-xG-42Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1227" y="-104"/>
-        </scene>
-        <!--Add Trip View Controller - Add trip-->
-        <scene sceneID="BUw-oV-p3o">
-            <objects>
-                <viewController id="WX8-WJ-0ks" customClass="BRAddTripViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CNb-JW-M9z"/>
-                        <viewControllerLayoutGuide type="bottom" id="gzV-tJ-uVY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NCG-G3-rFz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kc7-Md-R76">
-                                <rect key="frame" x="0.0" y="7" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="Qc2-lc-OVg">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="TgR-Gb-PDj">
-                                            <connections>
-                                                <segue destination="EgX-Dg-1Iu" kind="unwind" unwindAction="unwindWithoutSave:" id="Bz8-7P-0AP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="b3g-ba-b8T"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add trip" id="XYf-On-Yj9"/>
+                    <navigationItem key="navigationItem" id="n9T-Eb-ONV"/>
                 </viewController>
-                <exit id="EgX-Dg-1Iu" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u0B-Lj-cgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mk2-6G-5Mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656" y="-110"/>
+            <point key="canvasLocation" x="1107" y="-190"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xRl-YQ-25f">
