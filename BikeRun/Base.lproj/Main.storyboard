@@ -22,6 +22,9 @@
                                 <state key="normal" title="Start trip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7RN-I1-DoN" kind="push" id="5Ga-I3-w0b"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Y9-ub-OHy">
                                 <rect key="frame" x="20" y="80" width="280" height="181"/>
@@ -65,6 +68,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mk2-6G-5Mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1107" y="-190"/>
+        </scene>
+        <!--Navigation View Controller-->
+        <scene sceneID="Q49-ML-Ey0">
+            <objects>
+                <viewController id="7RN-I1-DoN" customClass="BRNavigationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tJG-kI-S1F"/>
+                        <viewControllerLayoutGuide type="bottom" id="INb-Pf-UIK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E5e-yD-fPk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SeF-eV-he8">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Route" id="Zy3-9q-zAu" userLabel="Route!">
+                                        <connections>
+                                            <action selector="routePressed:" destination="7RN-I1-DoN" id="kJw-VL-nAz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="56" style="plain" systemItem="fixedSpace" id="mpm-vq-mqS"/>
+                                    <barButtonItem title="destination" id="kzE-Ja-HbT">
+                                        <connections>
+                                            <action selector="destinationPressed:" destination="7RN-I1-DoN" id="KCx-bg-Twg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="55" style="plain" systemItem="fixedSpace" id="xc0-AA-Ar4"/>
+                                    <barButtonItem title="Clear" id="snq-d5-B0l">
+                                        <connections>
+                                            <action selector="clearPressed:" destination="7RN-I1-DoN" id="btT-im-HbH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzQ-OX-1Ph">
+                                <rect key="frame" x="0.0" y="415" width="320" height="109"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQB-cP-iWl">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="407"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kLy-wu-2qI"/>
+                    <connections>
+                        <outlet property="mapView" destination="cQB-cP-iWl" id="Af7-38-Awm"/>
+                        <outlet property="steps" destination="xzQ-OX-1Ph" id="KRg-u4-DA8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ouf-MC-uPB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="231"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xRl-YQ-25f">

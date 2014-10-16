@@ -1,0 +1,19 @@
+//
+//  BRNavigationViewController.h
+//  BikeRun
+//
+//  Created by Alex De Biasi on 16/10/14.
+//  Copyright (c) 2014 mad. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+@interface BRNavigationViewController : UIViewController <MKMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITextView *steps;
+@property (strong, nonatomic) NSString *allSteps;
+
+@end

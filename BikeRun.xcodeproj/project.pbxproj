@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8339713419EFFA04007AA32F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8339713319EFFA04007AA32F /* MapKit.framework */; };
+		8339713619EFFA32007AA32F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8339713519EFFA32007AA32F /* CoreLocation.framework */; };
+		8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339713819EFFCC9007AA32F /* BRNavigationViewController.m */; };
 		8B0174F219EDDDCB003488F1 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0174F119EDDDCB003488F1 /* DBManager.m */; };
 		8B0174F419EDDFC9003488F1 /* bikerun.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8B0174F319EDDFC9003488F1 /* bikerun.sqlite */; };
 		8B0174F719EDE022003488F1 /* BREditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0174F619EDE022003488F1 /* BREditInfoViewController.m */; };
@@ -42,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8339713319EFFA04007AA32F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8339713519EFFA32007AA32F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8339713719EFFCC9007AA32F /* BRNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRNavigationViewController.h; sourceTree = "<group>"; };
+		8339713819EFFCC9007AA32F /* BRNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRNavigationViewController.m; sourceTree = "<group>"; };
 		8B0174F019EDDDCB003488F1 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		8B0174F119EDDDCB003488F1 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		8B0174F319EDDFC9003488F1 /* bikerun.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikerun.sqlite; sourceTree = "<group>"; };
@@ -82,6 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8339713619EFFA32007AA32F /* CoreLocation.framework in Frameworks */,
+				8339713419EFFA04007AA32F /* MapKit.framework in Frameworks */,
 				8B22D70D19EC6BE600269F32 /* libsqlite3.dylib in Frameworks */,
 				CB40D09619922D5E003DB27F /* CoreGraphics.framework in Frameworks */,
 				CB40D09819922D5E003DB27F /* UIKit.framework in Frameworks */,
@@ -129,6 +138,8 @@
 		CB40D09219922D5E003DB27F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8339713519EFFA32007AA32F /* CoreLocation.framework */,
+				8339713319EFFA04007AA32F /* MapKit.framework */,
 				8B22D70C19EC6BE600269F32 /* libsqlite3.dylib */,
 				CB40D09319922D5E003DB27F /* Foundation.framework */,
 				CB40D09519922D5E003DB27F /* CoreGraphics.framework */,
@@ -153,6 +164,8 @@
 				CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */,
 				8B0174F519EDE022003488F1 /* BREditInfoViewController.h */,
 				8B0174F619EDE022003488F1 /* BREditInfoViewController.m */,
+				8339713719EFFCC9007AA32F /* BRNavigationViewController.h */,
+				8339713819EFFCC9007AA32F /* BRNavigationViewController.m */,
 			);
 			path = BikeRun;
 			sourceTree = "<group>";
@@ -300,6 +313,7 @@
 				CB40D0AA19922D5E003DB27F /* BRViewController.m in Sources */,
 				CB40D0A419922D5E003DB27F /* BRAppDelegate.m in Sources */,
 				CB40D0A019922D5E003DB27F /* main.m in Sources */,
+				8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */,
 				CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */,
 				8B0174F719EDE022003488F1 /* BREditInfoViewController.m in Sources */,
 				8B0174F219EDDDCB003488F1 /* DBManager.m in Sources */,
