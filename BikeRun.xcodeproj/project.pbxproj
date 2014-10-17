@@ -12,8 +12,9 @@
 		8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339713819EFFCC9007AA32F /* BRNavigationViewController.m */; };
 		8B0174F219EDDDCB003488F1 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0174F119EDDDCB003488F1 /* DBManager.m */; };
 		8B0174F419EDDFC9003488F1 /* bikerun.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8B0174F319EDDFC9003488F1 /* bikerun.sqlite */; };
-		8B0174F719EDE022003488F1 /* BREditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0174F619EDE022003488F1 /* BREditInfoViewController.m */; };
 		8B22D70D19EC6BE600269F32 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B22D70C19EC6BE600269F32 /* libsqlite3.dylib */; };
+		8BDCB3C219F1490600C9858C /* BREditStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCB3BF19F1490600C9858C /* BREditStepViewController.m */; };
+		8BDCB3C319F1490600C9858C /* BRStepLitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCB3C119F1490600C9858C /* BRStepLitViewController.m */; };
 		CB40D09419922D5E003DB27F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40D09319922D5E003DB27F /* Foundation.framework */; };
 		CB40D09619922D5E003DB27F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40D09519922D5E003DB27F /* CoreGraphics.framework */; };
 		CB40D09819922D5E003DB27F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB40D09719922D5E003DB27F /* UIKit.framework */; };
@@ -52,9 +53,11 @@
 		8B0174F019EDDDCB003488F1 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		8B0174F119EDDDCB003488F1 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		8B0174F319EDDFC9003488F1 /* bikerun.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikerun.sqlite; sourceTree = "<group>"; };
-		8B0174F519EDE022003488F1 /* BREditInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BREditInfoViewController.h; sourceTree = "<group>"; };
-		8B0174F619EDE022003488F1 /* BREditInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BREditInfoViewController.m; sourceTree = "<group>"; };
 		8B22D70C19EC6BE600269F32 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8BDCB3BE19F1490600C9858C /* BREditStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BREditStepViewController.h; sourceTree = "<group>"; };
+		8BDCB3BF19F1490600C9858C /* BREditStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BREditStepViewController.m; sourceTree = "<group>"; };
+		8BDCB3C019F1490600C9858C /* BRStepLitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStepLitViewController.h; sourceTree = "<group>"; };
+		8BDCB3C119F1490600C9858C /* BRStepLitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStepLitViewController.m; sourceTree = "<group>"; };
 		CB40D09019922D5E003DB27F /* BikeRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40D09319922D5E003DB27F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB40D09519922D5E003DB27F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,18 +157,20 @@
 			children = (
 				CB40D0A219922D5E003DB27F /* BRAppDelegate.h */,
 				CB40D0A319922D5E003DB27F /* BRAppDelegate.m */,
+				8BDCB3BE19F1490600C9858C /* BREditStepViewController.h */,
+				8BDCB3BF19F1490600C9858C /* BREditStepViewController.m */,
+				8339713719EFFCC9007AA32F /* BRNavigationViewController.h */,
+				8339713819EFFCC9007AA32F /* BRNavigationViewController.m */,
+				8BDCB3C019F1490600C9858C /* BRStepLitViewController.h */,
+				8BDCB3C119F1490600C9858C /* BRStepLitViewController.m */,
+				CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */,
+				CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */,
 				CB40D0A819922D5E003DB27F /* BRViewController.h */,
 				CB40D0A919922D5E003DB27F /* BRViewController.m */,
 				CB40D0AB19922D5E003DB27F /* Images.xcassets */,
 				CB40D0A519922D5E003DB27F /* Main.storyboard */,
 				CB40D09A19922D5E003DB27F /* Supporting Files */,
 				CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */,
-				CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */,
-				CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */,
-				8B0174F519EDE022003488F1 /* BREditInfoViewController.h */,
-				8B0174F619EDE022003488F1 /* BREditInfoViewController.m */,
-				8339713719EFFCC9007AA32F /* BRNavigationViewController.h */,
-				8339713819EFFCC9007AA32F /* BRNavigationViewController.m */,
 			);
 			path = BikeRun;
 			sourceTree = "<group>";
@@ -314,8 +319,9 @@
 				CB40D0A419922D5E003DB27F /* BRAppDelegate.m in Sources */,
 				CB40D0A019922D5E003DB27F /* main.m in Sources */,
 				8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */,
+				8BDCB3C319F1490600C9858C /* BRStepLitViewController.m in Sources */,
+				8BDCB3C219F1490600C9858C /* BREditStepViewController.m in Sources */,
 				CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */,
-				8B0174F719EDE022003488F1 /* BREditInfoViewController.m in Sources */,
 				8B0174F219EDDDCB003488F1 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

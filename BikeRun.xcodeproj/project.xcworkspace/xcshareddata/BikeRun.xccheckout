@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F6E53936-DB0A-4A41-8F48-EF6795A73273</string>
+	<string>A93F5E6B-89D0-412D-9143-3DA5813EAD27</string>
 	<key>IDESourceControlProjectName</key>
 	<string>BikeRun</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>https://github.com/andreabianco/BikeRun.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BikeRun.xcodeproj/project.xcworkspace</string>
+	<string>BikeRun.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A4D953441B59E1D9F975B9EF31B542C28558B7BA</key>
