@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 mad. All rights reserved.
 //
 
+
+
 #import "BRNavigationViewController.h"
 
 @interface BRNavigationViewController ()
@@ -14,20 +16,17 @@
 
 @implementation BRNavigationViewController
 
-CLPlacemark *thePlacemark;
-CLPlacemark *thePlacemark2;
-CLPlacemark *start;
 MKRoute *routeDetails; //object for route instruction
 int iter = 0;
 int waypoints=0;
-NSArray *dest;
+NSMutableDictionary *dest;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      self.mapView.delegate = self;
-    dest = [NSArray arrayWithObjects:@"Torino",@"Milano",@"Pavia",@"Torino",@"Milano",@"Pavia"@"Firenze",@"Roma",@"Napoli",@"Messina",nil];
+    dest=[[NSMutableDictionary alloc] init];
 
 }
 
@@ -39,116 +38,41 @@ NSArray *dest;
     [self.mapView addAnnotation:point];
 }
 
+
 - (IBAction)routePressed:(UIBarButtonItem *)sender {
     //method that calculate route
-    
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
-    MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:thePlacemark];
-    MKPlacemark *third = [[MKPlacemark alloc] initWithPlacemark:thePlacemark2];
-    MKPlacemark *begin = [[MKPlacemark alloc] initWithPlacemark:start];
-    [directionsRequest setSource:[[MKMapItem alloc] initWithPlacemark:begin]];
-    [directionsRequest setDestination:[[MKMapItem alloc] initWithPlacemark:placemark]];
-    directionsRequest.transportType = MKDirectionsTransportTypeWalking;
-    MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
-    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
-        if (error) {
-            NSLog(@"Error %@", error.description);
-        } else {
-            routeDetails = response.routes.lastObject;
-            [self.mapView addOverlay:routeDetails.polyline];
-            self.allSteps = @"";
-            for (int i = 0; i < routeDetails.steps.count; i++) {
-                MKRouteStep *step = [routeDetails.steps objectAtIndex:i];
-                NSString *newStep = step.instructions;
-                self.allSteps = [self.allSteps stringByAppendingString:newStep];
-                self.allSteps = [self.allSteps stringByAppendingString:@"\n\n"];
-                self.steps.text = self.allSteps;
+    for (int i=0; i<dest.count-1; i++) {
+        [directionsRequest setSource:[dest objectForKey:[NSNumber numberWithInt:i]]];
+        MKMapItem *elem =[dest objectForKey:[NSNumber numberWithInt:i]];
+        NSLog(@"SetSource:%@",elem.name);
+        [directionsRequest setDestination:[dest objectForKey:[NSNumber numberWithInt:i+1]]];
+        elem=[dest objectForKey:[NSNumber numberWithInt:i]];
+        NSLog(@"Setdest:%@",elem.name);
+        directionsRequest.transportType = MKDirectionsTransportTypeWalking;
+        MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+            if (error) {
+                NSLog(@"Error %@", error.description);
+            } else {
+                routeDetails = response.routes.lastObject;
+                [self.mapView addOverlay:routeDetails.polyline];
+                self.allSteps = @"";
+                for (int i = 0; i < routeDetails.steps.count; i++) {
+                    MKRouteStep *step = [routeDetails.steps objectAtIndex:i];
+                    NSString *newStep = step.instructions;
+                    self.allSteps = [self.allSteps stringByAppendingString:newStep];
+                    self.allSteps = [self.allSteps stringByAppendingString:@"\n\n"];
+                    self.steps.text = self.allSteps;
+                }
             }
-        }
-    }];
-    
-    //PROVA CON 2 STRADE
-    [directionsRequest setSource:[[MKMapItem alloc] initWithPlacemark:placemark]];
-    [directionsRequest setDestination:[[MKMapItem alloc] initWithPlacemark:third]];
-    directionsRequest.transportType = MKDirectionsTransportTypeWalking;
-    directions = [[MKDirections alloc] initWithRequest:directionsRequest];
-    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
-        if (error) {
-            NSLog(@"Error %@", error.description);
-        } else {
-            routeDetails = response.routes.lastObject;
-            [self.mapView addOverlay:routeDetails.polyline];
-            self.allSteps = @"";
-            for (int i = 0; i < routeDetails.steps.count; i++) {
-                MKRouteStep *step = [routeDetails.steps objectAtIndex:i];
-                NSString *newStep = step.instructions;
-                self.allSteps = [self.allSteps stringByAppendingString:newStep];
-                self.allSteps = [self.allSteps stringByAppendingString:@"\n\n"];
-                self.steps.text = self.allSteps;
-            }
-        }
-    }];
+        }];
 
+    }
 }
-- (IBAction)destinationPressed:(UIBarButtonItem *)sender {
-    //add the destination on the map
-    if (iter==2){
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:@"Pavia" completionHandler:^(NSArray *placemarks, NSError *error) {
-            if (error) {
-                NSLog(@"%@", error);
-            } else {
-                thePlacemark2 = [placemarks lastObject];
-                float spanX = 1.00725;
-                float spanY = 1.00725;
-                MKCoordinateRegion region;
-                region.center.latitude = thePlacemark2.location.coordinate.latitude;
-                region.center.longitude = thePlacemark2.location.coordinate.longitude;
-                region.span = MKCoordinateSpanMake(spanX, spanY);
-                [self.mapView setRegion:region animated:YES];
-                [self addAnnotation:thePlacemark2];
-            }
-        }];
-    }
 
-    if (iter==1){
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:@"Torino" completionHandler:^(NSArray *placemarks, NSError *error) {
-            if (error) {
-                NSLog(@"%@", error);
-            } else {
-                thePlacemark = [placemarks lastObject];
-                float spanX = 1.00725;
-                float spanY = 1.00725;
-                MKCoordinateRegion region;
-                region.center.latitude = thePlacemark.location.coordinate.latitude;
-                region.center.longitude = thePlacemark.location.coordinate.longitude;
-                region.span = MKCoordinateSpanMake(spanX, spanY);
-                [self.mapView setRegion:region animated:YES];
-                [self addAnnotation:thePlacemark];
-            }
-        }];
-        iter++;
-    }
-    if (iter ==0) {
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:@"Milano" completionHandler:^(NSArray *placemarks, NSError *error) {
-            if (error) {
-                NSLog(@"%@", error);
-            } else {
-                start = [placemarks lastObject];
-                float spanX = 1.00725;
-                float spanY = 1.00725;
-                MKCoordinateRegion region;
-                region.center.latitude = start.location.coordinate.latitude;
-                region.center.longitude = start.location.coordinate.longitude;
-                region.span = MKCoordinateSpanMake(spanX, spanY);
-                [self.mapView setRegion:region animated:YES];
-                [self addAnnotation:start];
-            }
-        }];
-        iter++;
-    }
+- (IBAction)destinationPressed:(UIBarButtonItem *)sender {
+    [self initDestArray:dest];
 }
 
 - (IBAction)clearPressed:(UIBarButtonItem *)sender {
@@ -187,6 +111,40 @@ NSArray *dest;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+/*********************************
+ *********************************
+ METODO PER INIZIALIZZARE LE TAPPE VA POI TOLTO E MI VIENE GIA RESTITUITO L'ARRAY 
+ **********************************/
+
+- (void)initDestArray:(NSMutableDictionary *)destinaz{
+    NSArray *mete=[[NSArray alloc] initWithObjects:@"Milano", @"Torino", @"Cuneo", @"Savona", @"Firenze", @"Siena", @"Roma", @"Salerno", @"Napoli", @"Reggio Calabria", @"Messina" , nil];
+    
+    
+    for (int i=0; i<mete.count; i++) {
+        NSString *stringa=[mete objectAtIndex:i];
+        NSLog(@"Destinazione %d nome:%@",i,stringa);
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:stringa completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                NSLog(@"%@", error);
+            } else {
+                 NSLog(@"Destinazione nel blocco %d nome:%@",i,stringa);
+                CLPlacemark *place;
+                place = [placemarks lastObject]; //prendi l'ultimo valore della ricerca
+                [self addAnnotation:place];      //aggiungi il pin
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:place];
+                MKMapItem* item=[[MKMapItem alloc] initWithPlacemark:placemark];
+                item.name=stringa;
+                [dest setObject:item forKey:[NSNumber numberWithInt:i]];
+            }
+        }];
+        
+    }
+    
 }
 
 /*
