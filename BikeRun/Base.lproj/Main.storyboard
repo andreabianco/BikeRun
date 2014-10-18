@@ -122,17 +122,22 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert the latitude" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tNA-m6-U4m">
                                 <rect key="frame" x="20" y="93" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="numbersAndPunctuation"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert a short description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9IP-Ar-HUq">
                                 <rect key="frame" x="20" y="187" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert the longitudine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYc-X6-7Qf">
                                 <rect key="frame" x="20" y="139" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="numbersAndPunctuation"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert the addres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPL-8g-Pt9">
+                                <rect key="frame" x="20" y="235" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,6 +150,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="txtAddress" destination="rPL-8g-Pt9" id="lff-zm-fdQ"/>
                         <outlet property="txtDesc" destination="9IP-Ar-HUq" id="TFF-6l-yXu"/>
                         <outlet property="txtLat" destination="tNA-m6-U4m" id="FM4-SS-T7q"/>
                         <outlet property="txtLong" destination="RYc-X6-7Qf" id="1t2-h9-h1A"/>

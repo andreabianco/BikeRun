@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "DBManager.h"
 
 @interface BRNavigationViewController : UIViewController <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextView *steps;
 @property (strong, nonatomic) NSString *allSteps;
+
+@property (strong,nonatomic) DBManager *dbManager;
 
 @end

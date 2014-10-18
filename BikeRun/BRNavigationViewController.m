@@ -27,6 +27,8 @@ NSMutableDictionary *dest;
     // Do any additional setup after loading the view.
      self.mapView.delegate = self;
     dest=[[NSMutableDictionary alloc] init];
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"bikerun.sqlite"];
 
 }
 
@@ -123,9 +125,18 @@ NSMutableDictionary *dest;
 - (void)initDestArray:(NSMutableDictionary *)destinaz{
     NSArray *mete=[[NSArray alloc] initWithObjects:@"Milano", @"Torino", @"Cuneo", @"Savona", @"Firenze", @"Siena", @"Roma", @"Salerno", @"Napoli", @"Reggio Calabria", @"Messina" , nil];
     
+    NSString *query = @"select * from stepTour";
+    NSArray *arrSteps;
+    // Get the results.
+    if (arrSteps != nil) {
+        arrSteps = nil;
+    }
+    arrSteps = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"address"];
     
-    for (int i=0; i<mete.count; i++) {
-        NSString *stringa=[mete objectAtIndex:i];
+    
+    for (int i=0; i<arrSteps.count; i++) {
+        NSString *stringa=[[arrSteps objectAtIndex:i] objectAtIndex:indexOfAddress];
         NSLog(@"Destinazione %d nome:%@",i,stringa);
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
         [geocoder geocodeAddressString:stringa completionHandler:^(NSArray *placemarks, NSError *error) {

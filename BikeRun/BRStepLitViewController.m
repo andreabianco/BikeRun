@@ -50,11 +50,11 @@
     
     NSInteger indexOfLat = [self.dbManager.arrColumnNames indexOfObject:@"lat"];
     NSInteger indexOfLong = [self.dbManager.arrColumnNames indexOfObject:@"long"];
+    NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"address"];
     
     // Set the loaded data to the appropriate cell labels.
-    cell.textLabel.text = [NSString stringWithFormat:@"Lat: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLat]];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Long: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLong]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Lat: %@ - Long: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLat], [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLong]];
     
     return cell;
 }

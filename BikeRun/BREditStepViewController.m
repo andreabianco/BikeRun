@@ -18,12 +18,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.txtAddress.delegate = self;
+    self.txtDesc.delegate = self;
+    self.txtLat.delegate = self;
+    self.txtLong.delegate = self;
+    
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"bikerun.sqlite"];
     
     if(self.recordIDToEdit != -1) {
         [self loadStepToEdit];
     }
     
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,9 +55,9 @@
     // Prepare the query string.
     NSString *query;
     if (self.recordIDToEdit != -1) {
-        query = [NSString stringWithFormat:@"update stepTour set lat='%@', long='%@', description='%@' where id=%d", self.txtLat.text, self.txtLong.text, self.txtDesc.text, self.recordIDToEdit];
+        query = [NSString stringWithFormat:@"update stepTour set lat='%@', long='%@', description='%@', address='%@' where id=%d", self.txtLat.text, self.txtLong.text, self.txtDesc.text, self.txtAddress.text, self.recordIDToEdit];
     } else {
-        query = [NSString stringWithFormat:@"insert into stepTour values(null, '%@', '%@', '%@')", self.txtLat.text, self.txtLong.text, self.txtDesc.text];
+        query = [NSString stringWithFormat:@"insert into stepTour values(null, '%@', '%@', '%@', '%@')", self.txtLat.text, self.txtLong.text, self.txtDesc.text, self.txtAddress.text];
     }
     
     // Execute the query.
@@ -78,6 +88,7 @@
     self.txtLat.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lat"]];
     self.txtLong.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"long"]];
     self.txtDesc.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"description"]];
+    self.txtAddress.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"address"]];
 }
 
 @end
