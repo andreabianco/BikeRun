@@ -32,6 +32,7 @@
 		CB40D0CA19923447003DB27F /* full_bike_White.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB40D0C919923447003DB27F /* full_bike_White.jpg */; };
 		CB9ED51D1998B763000B03D3 /* TripCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */; };
 		CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */; };
+		CBCB930419F688B8007B8BAB /* BRSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCB930319F688B8007B8BAB /* BRSearchLocationViewController.m */; };
 		CBF4BEF319A4E573005907BF /* sviluppi.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF4BEF219A4E573005907BF /* sviluppi.txt */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripCustomCell.xib; sourceTree = "<group>"; };
 		CB9ED51E1998BBE8000B03D3 /* BRTripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTripTableViewCell.h; sourceTree = "<group>"; };
 		CB9ED51F1998BBE8000B03D3 /* BRTripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTripTableViewCell.m; sourceTree = "<group>"; };
+		CBCB930219F688B8007B8BAB /* BRSearchLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSearchLocationViewController.h; sourceTree = "<group>"; };
+		CBCB930319F688B8007B8BAB /* BRSearchLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSearchLocationViewController.m; sourceTree = "<group>"; };
 		CBF4BEF219A4E573005907BF /* sviluppi.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sviluppi.txt; sourceTree = "<group>"; };
 		CBF4BEF419ADF3D7005907BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBF4BEF519ADF3D7005907BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				CB40D0A519922D5E003DB27F /* Main.storyboard */,
 				CB40D09A19922D5E003DB27F /* Supporting Files */,
 				CB9ED51C1998B763000B03D3 /* TripCustomCell.xib */,
+				CBCB930219F688B8007B8BAB /* BRSearchLocationViewController.h */,
+				CBCB930319F688B8007B8BAB /* BRSearchLocationViewController.m */,
 			);
 			path = BikeRun;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				8BDCB3C319F1490600C9858C /* BRStepLitViewController.m in Sources */,
 				8BDCB3C219F1490600C9858C /* BREditStepViewController.m in Sources */,
 				CB9ED5201998BBE8000B03D3 /* BRTripTableViewCell.m in Sources */,
+				CBCB930419F688B8007B8BAB /* BRSearchLocationViewController.m in Sources */,
 				8B0174F219EDDDCB003488F1 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
