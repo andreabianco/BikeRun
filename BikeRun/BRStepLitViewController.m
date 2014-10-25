@@ -48,12 +48,14 @@
     // Dequeue the cell.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idStepCell" forIndexPath:indexPath];
     
-    NSInteger indexOfLat = [self.dbManager.arrColumnNames indexOfObject:@"lat"];
-    NSInteger indexOfLong = [self.dbManager.arrColumnNames indexOfObject:@"long"];
+    //NSInteger indexOfLat = [self.dbManager.arrColumnNames indexOfObject:@"lat"];
+    //NSInteger indexOfLong = [self.dbManager.arrColumnNames indexOfObject:@"long"];
+    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"description"];
     NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"address"];
     
     // Set the loaded data to the appropriate cell labels.
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
     //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lat: %@ - Long: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLat], [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLong]];
     
     return cell;

@@ -21,8 +21,8 @@
     
     self.txtAddress.delegate = self;
     self.txtDesc.delegate = self;
-    self.txtLat.delegate = self;
-    self.txtLong.delegate = self;
+    //self.txtLat.delegate = self;
+    //self.txtLong.delegate = self;
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"bikerun.sqlite"];
     
@@ -103,10 +103,69 @@
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
     // Set the loaded data to the textfields.
-    self.txtLat.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lat"]];
-    self.txtLong.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"long"]];
+    double lat = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lat"]] doubleValue];
+    double lon = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"long"]] doubleValue];
     self.txtDesc.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"description"]];
     self.txtAddress.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"address"]];
+    
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(lat, lon);
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+    [annotation setCoordinate:location];
+    [annotation setTitle:self.txtAddress.text];
+    [self.mapStep addAnnotation:annotation];
+    
+    //Scroll to search result
+    MKMapRect mr = [self.mapStep visibleMapRect];
+    MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
+    mr.origin.x = pt.x - mr.size.width * 0.5;
+    mr.origin.y = pt.y - mr.size.height * 0.25;
+    [self.mapStep setVisibleMapRect:mr animated:YES];
+
+    MKCoordinateRegion region;
+    region.center = location;
+    //MKCoordinateSpan span;
+    //span.latitudeDelta = 0.5;
+    //span.longitudeDelta = 0.5;
+    //region.span = span;
+    [self.mapStep setRegion:region animated:YES];
+    
+}
+
+- (IBAction)verifyLoaction:(id)sender {
+    if ([self.txtAddress.text isEqualToString:@""]) {
+        //Empty
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"BikeRun"
+                                                          message:@"Insert the address!"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    } else {
+        //Cerco address
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:self.txtAddress.text completionHandler:^(NSArray *placemarks, NSError *error) {
+            
+            //Mark location and center
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            MKCoordinateRegion region;
+            CLLocationCoordinate2D newLocation = [placemark.location coordinate];
+            region.center = [(CLCircularRegion *) placemark.region center];
+            
+            //Drop pin
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+            [annotation setCoordinate:newLocation];
+            [annotation setTitle:self.txtDesc.text];
+            [self.mapStep addAnnotation:annotation];
+            
+            //Scroll to search result
+            MKMapRect mr = [self.mapStep visibleMapRect];
+            MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
+            mr.origin.x = pt.x - mr.size.width * 0.5;
+            mr.origin.y = pt.y - mr.size.height * 0.25;
+            [self.mapStep setVisibleMapRect:mr animated:YES];
+            
+        }];
+    }
 }
 
 @end

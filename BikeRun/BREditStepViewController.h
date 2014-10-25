@@ -7,20 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "DBManager.h"
 
 @protocol EditStepViewControllerDelegate
 -(void)editingStepWasFinished;
 @end
 
-@interface BREditStepViewController : UIViewController <UITextFieldDelegate>
+@interface BREditStepViewController : UIViewController <UITextFieldDelegate,MKMapViewDelegate>
 
 @property (strong,nonatomic) DBManager *dbManager;
 
-@property (weak, nonatomic) IBOutlet UITextField *txtLong;
-@property (weak, nonatomic) IBOutlet UITextField *txtLat;
+//@property (weak, nonatomic) IBOutlet UITextField *txtLong;
+//@property (weak, nonatomic) IBOutlet UITextField *txtLat;
 @property (weak, nonatomic) IBOutlet UITextField *txtDesc;
 @property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+@property (weak, nonatomic) IBOutlet MKMapView *mapStep;
 
 @property (nonatomic,strong) id<EditStepViewControllerDelegate> delegate;
 @property (nonatomic) int recordIDToEdit;
@@ -28,5 +30,6 @@
 - (IBAction)saveStep:(id)sender;
 
 -(void)loadStepToEdit;
+- (IBAction)verifyLoaction:(id)sender;
 
 @end
