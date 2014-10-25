@@ -53,28 +53,45 @@
 }
 
 - (IBAction)saveStep:(id)sender {
-    // Prepare the query string.
-    NSString *query;
-    if (self.recordIDToEdit != -1) {
-        query = [NSString stringWithFormat:@"update stepTour set lat='%@', long='%@', description='%@', address='%@' where id=%d", self.txtLat.text, self.txtLong.text, self.txtDesc.text, self.txtAddress.text, self.recordIDToEdit];
+    
+    if([self.txtAddress.text isEqualToString:@""]) {
+        NSLog(@"Address empty!");
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"BikeRun"
+                                                          message:@"Insert the address!"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
     } else {
-        query = [NSString stringWithFormat:@"insert into stepTour values(null, '%@', '%@', '%@', '%@')", self.txtLat.text, self.txtLong.text, self.txtDesc.text, self.txtAddress.text];
-    }
-    
-    // Execute the query.
-    [self.dbManager executeQuery:query];
-    
-    // If the query was successfully executed then pop the view controller.
-    if (self.dbManager.affectedRows != 0) {
-        NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
         
-        [self.delegate editingStepWasFinished];
+        NSString *addressToSearch = self.txtAddress.text;
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:addressToSearch completionHandler:^(NSArray *placemarks, NSError *error) {
+            
+            //Get geo information to save in DB
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            CLLocationCoordinate2D newLocation = [placemark.location coordinate];
+            double lat = newLocation.latitude;
+            double lon = newLocation.longitude;
+            
+            // Prepare the query string.
+            NSString *query;
+            if (self.recordIDToEdit != -1) {
+                query = [NSString stringWithFormat:@"update stepTour set lat=%f, long=%f, description='%@', address='%@' where id=%d", lat, lon, self.txtDesc.text, addressToSearch, self.recordIDToEdit];
+            } else {
+                query = [NSString stringWithFormat:@"insert into stepTour values(null, %f, %f, '%@', '%@')", lat, lon, self.txtDesc.text, addressToSearch];
+            }
+            [self.dbManager executeQuery:query];
+            if(self.dbManager.affectedRows != 0) {
+                NSLog(@"Success");
+                [self.delegate editingStepWasFinished];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                NSLog(@"Error");
+            }
+            
+        }];
         
-        // Pop the view controller.
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else{
-        NSLog(@"Could not execute the query.");
     }
 }
 

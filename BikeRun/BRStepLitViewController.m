@@ -54,7 +54,7 @@
     
     // Set the loaded data to the appropriate cell labels.
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Lat: %@ - Long: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLat], [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLong]];
+    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lat: %@ - Long: %@", [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLat], [[self.arrSteps objectAtIndex:indexPath.row] objectAtIndex:indexOfLong]];
     
     return cell;
 }
