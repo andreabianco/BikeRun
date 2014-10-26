@@ -30,6 +30,6 @@
 - (IBAction)saveStep:(id)sender;
 
 -(void)loadStepToEdit;
-- (IBAction)verifyLoaction:(id)sender;
+- (IBAction)verifyLocation:(id)sender;
 
 @end

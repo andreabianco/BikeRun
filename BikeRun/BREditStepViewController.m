@@ -11,6 +11,11 @@
 
 @interface BREditStepViewController ()
 
+@property (strong,nonatomic) NSString *addressStep;
+@property (strong,nonatomic) NSString *nameStep;
+@property (nonatomic) double latStep;
+@property (nonatomic) double longStep;
+
 @end
 
 @implementation BREditStepViewController
@@ -30,6 +35,33 @@
         [self loadStepToEdit];
     }
     
+}
+
+-(void)placeAnnotationInMap:(CLLocationCoordinate2D)location {
+    
+    [self.mapStep removeAnnotations:self.mapStep.annotations];
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+    [annotation setCoordinate:location];
+    [annotation setTitle:self.nameStep];
+    [annotation setSubtitle:self.addressStep];
+    [self.mapStep addAnnotation:annotation];
+    
+    //Scroll to search result
+    //MKMapRect mr = [self.mapStep visibleMapRect];
+    //MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
+    //mr.origin.x = pt.x - mr.size.width * 0.5;
+    //mr.origin.y = pt.y - mr.size.height * 0.25;
+    //[self.mapStep setVisibleMapRect:mr animated:YES];
+    
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.01f;
+    span.longitudeDelta = 0.01f;
+    
+    MKCoordinateRegion region;
+    region.center = location;
+    region.span = span;
+    [self.mapStep setRegion:region animated:YES];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -104,34 +136,19 @@
     
     // Set the loaded data to the textfields.
     double lat = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"lat"]] doubleValue];
+    self.latStep = lat;
     double lon = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"long"]] doubleValue];
+    self.longStep = lon;
     self.txtDesc.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"description"]];
+    self.nameStep = self.txtDesc.text;
     self.txtAddress.text = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"address"]];
+    self.addressStep = self.txtAddress.text;
     
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(lat, lon);
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-    [annotation setCoordinate:location];
-    [annotation setTitle:self.txtAddress.text];
-    [self.mapStep addAnnotation:annotation];
-    
-    //Scroll to search result
-    MKMapRect mr = [self.mapStep visibleMapRect];
-    MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
-    mr.origin.x = pt.x - mr.size.width * 0.5;
-    mr.origin.y = pt.y - mr.size.height * 0.25;
-    [self.mapStep setVisibleMapRect:mr animated:YES];
-
-    MKCoordinateRegion region;
-    region.center = location;
-    //MKCoordinateSpan span;
-    //span.latitudeDelta = 0.5;
-    //span.longitudeDelta = 0.5;
-    //region.span = span;
-    [self.mapStep setRegion:region animated:YES];
+    [self placeAnnotationInMap:CLLocationCoordinate2DMake(self.latStep, self.longStep)];
     
 }
 
-- (IBAction)verifyLoaction:(id)sender {
+- (IBAction)verifyLocation:(id)sender {
     if ([self.txtAddress.text isEqualToString:@""]) {
         //Empty
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"BikeRun"
@@ -142,6 +159,10 @@
         [message show];
     } else {
         //Cerco address
+        
+        self.addressStep = self.txtAddress.text;
+        self.nameStep = self.txtDesc.text;
+        
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
         [geocoder geocodeAddressString:self.txtAddress.text completionHandler:^(NSArray *placemarks, NSError *error) {
             
@@ -149,20 +170,22 @@
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             MKCoordinateRegion region;
             CLLocationCoordinate2D newLocation = [placemark.location coordinate];
-            region.center = [(CLCircularRegion *) placemark.region center];
+            [self placeAnnotationInMap:newLocation];
             
-            //Drop pin
-            MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-            [annotation setCoordinate:newLocation];
-            [annotation setTitle:self.txtDesc.text];
-            [self.mapStep addAnnotation:annotation];
-            
-            //Scroll to search result
-            MKMapRect mr = [self.mapStep visibleMapRect];
-            MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
-            mr.origin.x = pt.x - mr.size.width * 0.5;
-            mr.origin.y = pt.y - mr.size.height * 0.25;
-            [self.mapStep setVisibleMapRect:mr animated:YES];
+//            region.center = [(CLCircularRegion *) placemark.region center];
+//            
+//            //Drop pin
+//            MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+//            [annotation setCoordinate:newLocation];
+//            [annotation setTitle:self.txtDesc.text];
+//            [self.mapStep addAnnotation:annotation];
+//            
+//            //Scroll to search result
+//            MKMapRect mr = [self.mapStep visibleMapRect];
+//            MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
+//            mr.origin.x = pt.x - mr.size.width * 0.5;
+//            mr.origin.y = pt.y - mr.size.height * 0.25;
+//            [self.mapStep setVisibleMapRect:mr animated:YES];
             
         }];
     }
