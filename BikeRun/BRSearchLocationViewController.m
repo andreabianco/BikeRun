@@ -30,6 +30,7 @@
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         MKCoordinateRegion region;
         CLLocationCoordinate2D newLocation = [placemark.location coordinate];
+        //NSString *test = placemark.locality;
         region.center = [(CLCircularRegion *) placemark.region center];
         
         //Drop pin
