@@ -28,20 +28,32 @@ NSMutableDictionary *dest;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.mapView.delegate = self;
+    dest=[[NSMutableDictionary alloc] init];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"bikerun.sqlite"];
     //Qua dovrebbe fare la chiamata e apparire l'alert da accettare, ma non accade.
   //  [self requestAlwaysAuthorization];
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
+    CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager startUpdatingLocation];
     }
-    [self.locationManager startUpdatingLocation];
-    self.mapView.showsUserLocation=YES;
-    dest=[[NSMutableDictionary alloc] init];
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"bikerun.sqlite"];
+    else{
     
-
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            //[self.locationManager requestWhenInUseAuthorization];
+            [self.locationManager requestAlwaysAuthorization];
+        }
+//    [self.locationManager startUpdatingLocation];
+//    self.mapView.showsUserLocation=YES;
+    
+//    
+    }
 }
 
+/*!
+ commento
+ @param placemark Questo è un parametro
+ */
 - (void)addAnnotation:(CLPlacemark *)placemark {
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = CLLocationCoordinate2DMake(placemark.location.coordinate.latitude, placemark.location.coordinate.longitude);
@@ -171,7 +183,7 @@ NSMutableDictionary *dest;
 //    METODO PER RICHIEDERE AUTH
 //
 //
-- (void)requestAlwaysAuthorization
+- (void)requestWheninUseAuthorization
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
@@ -203,7 +215,18 @@ NSMutableDictionary *dest;
     }
 }
 
-
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager startUpdatingLocation];
+    }
+}
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    self.mapView.showsUserLocation = YES;
+    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
+}
 /*
 #pragma mark - Navigation
 
