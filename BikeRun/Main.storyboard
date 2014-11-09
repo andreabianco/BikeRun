@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Iaq-oZ-5DQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Iaq-oZ-5DQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -26,7 +26,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="TsS-PV-KJB" kind="push" identifier="showStepTour" id="8nD-cr-L1R"/>
+                                    <segue destination="inF-1U-Sw0" kind="push" id="ern-9o-7P5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjQ-Wu-09C">
@@ -58,6 +58,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="660" y="130"/>
+        </scene>
+        <!--Tour List-->
+        <scene sceneID="683-U9-DUh">
+            <objects>
+                <viewController id="inF-1U-Sw0" customClass="BRTourListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wxV-Ri-04M"/>
+                        <viewControllerLayoutGuide type="bottom" id="4cC-Gp-L5i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oY9-oD-6he">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mcQ-kx-SjL">
+                                <rect key="frame" x="0.0" y="1" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellTour" id="WcM-o4-cnz">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WcM-o4-cnz" id="Kw8-aF-sRt">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tour List" id="XFq-wN-2qD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SRL-3i-mFQ">
+                            <connections>
+                                <action selector="addTour:" destination="inF-1U-Sw0" id="YS7-pj-PMG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tblTours" destination="mcQ-kx-SjL" id="9bw-dg-Voc"/>
+                        <segue destination="eYr-h0-TZU" kind="push" identifier="showTourEdit" id="LEv-3E-pKF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jfr-2h-ZMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1168" y="-231"/>
+        </scene>
+        <!--Edit Tour-->
+        <scene sceneID="EHf-P8-NNZ">
+            <objects>
+                <viewController id="eYr-h0-TZU" customClass="BREditTourViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ogy-oE-RR3"/>
+                        <viewControllerLayoutGuide type="bottom" id="QHh-d0-LrE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ir8-d5-OhG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Inserisci il nome del tour" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oEP-dL-kTx">
+                                <rect key="frame" x="16" y="91" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Tour" id="pd6-kY-Aqh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="x50-0j-P2d">
+                            <connections>
+                                <action selector="saveTour:" destination="eYr-h0-TZU" id="E7r-IR-Ajd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="txtNameTour" destination="oEP-dL-kTx" id="ooy-Qq-rga"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gaj-Vc-Bdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1559" y="-231"/>
         </scene>
         <!--Step List-->
         <scene sceneID="nSJ-yt-Rs2">
@@ -115,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JRn-rC-fnJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1168" y="-216"/>
+            <point key="canvasLocation" x="2055" y="-200"/>
         </scene>
         <!--Edit Step-->
         <scene sceneID="UGy-fc-0nE">
@@ -169,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DjB-Ej-ILp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1571" y="-216"/>
+            <point key="canvasLocation" x="2504" y="-200"/>
         </scene>
         <!--Travelling View Controller-->
         <scene sceneID="jBr-1v-jQB">
