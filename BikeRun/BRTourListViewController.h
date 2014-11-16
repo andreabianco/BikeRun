@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tblTours;
 
 @property (strong,nonatomic) DBManager *dbManager;
+@property (nonatomic) int recordToEdit;
 
 @end

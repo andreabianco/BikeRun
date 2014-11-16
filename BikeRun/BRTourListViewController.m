@@ -59,6 +59,30 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.recordToEdit = [[[self.arrTours objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+    [self performSegueWithIdentifier:@"showTourEdit" sender:self];
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the selected record.
+        // Find the record ID.
+        int recordIDToDelete = [[[self.arrTours objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+        
+        // Prepare the query.
+        NSString *query = [NSString stringWithFormat:@"delete from trip where id=%d", recordIDToDelete];
+        
+        // Execute the query.
+        [self.dbManager executeQuery:query];
+        
+        // Reload the table view.
+        [self loadTours];
+    }
+}
+
 -(void)loadTours
 {
     // Form the query.
@@ -82,10 +106,12 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     BREditTourViewController *editTourViewController = [segue destinationViewController];
+    editTourViewController.recordToEdit = self.recordToEdit;
     editTourViewController.delegate = self;
 }
 
 - (IBAction)addTour:(id)sender {
+    self.recordToEdit = -1;
     [self performSegueWithIdentifier:@"showTourEdit" sender:self];
 }
 

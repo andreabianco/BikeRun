@@ -15,6 +15,7 @@
 @property (nonatomic,strong) DBManager *dbManager;
 @property (nonatomic,strong) NSArray *arrSteps;
 @property (nonatomic) int recordIdToEdit;
+@property (nonatomic) int idTour;
 
 @property (weak, nonatomic) IBOutlet UITableView *tblSteps;
 

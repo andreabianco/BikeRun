@@ -102,7 +102,7 @@
 
 -(void)loadData{
     // Form the query.
-    NSString *query = @"select * from stepTour";
+    NSString *query = [NSString stringWithFormat:@"select * from stepTour where idTour = %d", self.idTour];
     
     // Get the results.
     if (self.arrSteps != nil) {
