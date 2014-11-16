@@ -114,7 +114,16 @@
     [self.tblSteps reloadData];
 }
 
--(void)editingStepWasFinished{
+-(void)editingStepWasFinished:(NSDictionary *)data
+{
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:6];
+    [array addObject:[data objectForKey:@"id"]];
+    [array addObject:[data objectForKey:@"lat"]];
+    [array addObject:[data objectForKey:@"long"]];
+    [array addObject:[data objectForKey:@"desc"]];
+    [array addObject:[data objectForKey:@"addess"]];
+    [array addObject:[NSNumber numberWithInt:self.idTour]];
+    
     [self loadData];
 }
 

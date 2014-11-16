@@ -11,7 +11,7 @@
 #import "DBManager.h"
 
 @protocol EditStepViewControllerDelegate
--(void)editingStepWasFinished;
+-(void)editingStepWasFinished:(NSDictionary*)data;
 @end
 
 @interface BREditStepViewController : UIViewController <UITextFieldDelegate,MKMapViewDelegate>
@@ -26,6 +26,7 @@
 
 @property (nonatomic,strong) id<EditStepViewControllerDelegate> delegate;
 @property (nonatomic) int recordIDToEdit;
+@property (nonatomic) int idTour;
 
 - (IBAction)saveStep:(id)sender;
 

@@ -84,6 +84,7 @@
     searchLocationViewController.locationToSearch = self.txtAddress.text;
 }
 
+/*
 - (IBAction)saveStep:(id)sender {
     
     if([self.txtAddress.text isEqualToString:@""]) {
@@ -124,6 +125,41 @@
             
         }];
         
+    }
+}*/
+
+-(void)saveStep:(id)sender
+{
+    if([self.txtAddress.text isEqualToString:@""])
+    {
+        NSLog(@"Address empty!");
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"BikeRun"
+                                                          message:@"Insert the address!"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
+    else
+    {
+        NSString *addressToSearch = self.txtAddress.text;
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:addressToSearch completionHandler:^(NSArray *placemarks, NSError *error) {
+            
+            //Get geo information to save in DB
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            CLLocationCoordinate2D newLocation = [placemark.location coordinate];
+            double lat = newLocation.latitude;
+            double lon = newLocation.longitude;
+            
+            NSArray *keys = [NSArray arrayWithObjects:@"id", @"address", @"desc", @"lat", @"long", nil];
+            NSArray *objects = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.recordIDToEdit], self.txtAddress.text, self.txtDesc.text, [NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lon], nil];
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects
+                                                                   forKeys:keys];
+            [self.delegate editingStepWasFinished:dictionary];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }];
     }
 }
 
