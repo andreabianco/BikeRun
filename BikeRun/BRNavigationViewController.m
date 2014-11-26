@@ -9,6 +9,7 @@
 
 
 #import "BRNavigationViewController.h"
+#import "BRSharedVariables.h"
 
 @interface BRNavigationViewController ()
 
@@ -17,9 +18,11 @@
 @implementation BRNavigationViewController
 
 MKRoute *routeDetails; //object for route instruction
+
 int iter = 0;
 int waypoints=0;
 NSMutableDictionary *dest;
+BRSharedVariables *sharedManager;
 
 
 - (void)viewDidLoad {
@@ -35,11 +38,14 @@ NSMutableDictionary *dest;
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager stopUpdatingLocation];
         [self.locationManager startUpdatingLocation];
+       // self.mapView.showsUserLocation = YES;
+
     }
     else{
     
-        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
             //[self.locationManager requestWhenInUseAuthorization];
             [self.locationManager requestAlwaysAuthorization];
         }
@@ -65,6 +71,7 @@ NSMutableDictionary *dest;
 
 - (IBAction)routePressed:(UIBarButtonItem *)sender {
     //method that calculate route
+    NSMutableArray *destinazioni=[[NSMutableArray alloc]init];
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
     for (int i=0; i<dest.count-1; i++) {
         [directionsRequest setSource:[dest objectForKey:[NSNumber numberWithInt:i]]];
@@ -80,6 +87,10 @@ NSMutableDictionary *dest;
                 NSLog(@"Error %@", error.description);
             } else {
                 routeDetails = response.routes.lastObject;
+                //DA CANCELLARE QUANDO IMP IN DATABASE///////
+                sharedManager = [BRSharedVariables sharedVariablesManager];
+                [sharedManager.destList addObject:routeDetails];//add the current direction to the array of direction to store it
+                ////////////////////////////////////////////
                 [self.mapView addOverlay:routeDetails.polyline];
                 self.allSteps = @"";
                 for (int i = 0; i < routeDetails.steps.count; i++) {
@@ -89,9 +100,12 @@ NSMutableDictionary *dest;
                     self.allSteps = [self.allSteps stringByAppendingString:@"\n\n"];
                     self.steps.text = self.allSteps;
                 }
+                NSLog(@"DENTRO:numero elementi %d filled=%@",sharedManager.destList.count,sharedManager.filled);
+
             }
         }];
-
+        //try to dispaly something
+        [self show_message];
     }
 }
 
@@ -100,7 +114,15 @@ NSMutableDictionary *dest;
 }
 
 - (IBAction)clearPressed:(UIBarButtonItem *)sender {
-    //method that clear the map (Just the route)
+    //method that clear the map (route + pins )
+    id userLocation = [self.mapView userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
+    if ( userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
+    
+    [self.mapView removeAnnotations:pins];
+    pins = nil;
     self.steps.text = nil;
     [self.mapView removeOverlay:routeDetails.polyline];
 }
@@ -183,7 +205,7 @@ NSMutableDictionary *dest;
 //    METODO PER RICHIEDERE AUTH
 //
 //
-- (void)requestWheninUseAuthorization
+- (void)requestAwaysAuthorization
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
@@ -219,13 +241,33 @@ NSMutableDictionary *dest;
 {
     
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+         [self.locationManager stopUpdatingLocation];
         [self.locationManager startUpdatingLocation];
+        //self.mapView.showsUserLocation = YES;
     }
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     self.mapView.showsUserLocation = YES;
     [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
     NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
+
+}
+
+-(void) show_message{
+    NSString *message = @"You are going in the wrong direction! Please come back.";
+     NSString *cancel = @"Ok";
+    
+    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancel
+                                          otherButtonTitles:nil, nil];
+    [toast show];
+    int duration = 5; // duration in seconds
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [toast dismissWithClickedButtonIndex:0 animated:YES];
+    });
 }
 /*
 #pragma mark - Navigation

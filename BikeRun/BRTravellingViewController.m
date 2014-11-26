@@ -7,67 +7,92 @@
 //
 
 #import "BRTravellingViewController.h"
-
+#import "BRSharedVariables.h"
 @interface BRTravellingViewController ()
 
 @end
 
 @implementation BRTravellingViewController
 
+BRSharedVariables *sharedManager;
+MKRoute *routeDetails;
+
 - (void)viewDidLoad {
    [super viewDidLoad];
 //    // Do any additional setup after loading the view.
-//    self.locationManager = [[CLLocationManager alloc] init];
-//    self.locationManager.delegate = self;
-//    self.mapView.delegate = self;
-//    //Qua dovrebbe fare la chiamata e apparire l'alert da accettare, ma non accade.
-//    //  [self requestAlwaysAuthorization];
-//    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-//    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-//        [self.locationManager requestWhenInUseAuthorization];
-//    }
-//    [self.locationManager startUpdatingLocation];
-    self.mapView.delegate = self;
-    
-    
-    //Instantiate a location object.
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    sharedManager = [BRSharedVariables sharedVariablesManager];
     self.locationManager = [[CLLocationManager alloc] init];
-    
-    //Make this controller the delegate for the location manager.
-    [self.locationManager setDelegate:self];
-    
-    //Set some parameters for the location object.
-    [self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    
-    // Request use on iOS 8
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        // Ensure that you can view your own location in the map view.
-        [self.mapView setShowsUserLocation:YES];
-    } else {
-        [self.locationManager requestWhenInUseAuthorization];
+    self.locationManager.delegate = self;
+    self.mapView.delegate = self;
+    CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager stopUpdatingLocation];
+        [self.locationManager startUpdatingLocation];
+        // self.mapView.showsUserLocation = YES;
+        
+    }
+    else{
+        
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            //[self.locationManager requestWhenInUseAuthorization];
+            [self.locationManager requestAlwaysAuthorization];
+        }
+       }
+    NSMutableArray *destinations=sharedManager.destList;
+    for (int i=0; i<destinations.count; i++) {
+        routeDetails=destinations[i];
+        [self.mapView addOverlay:routeDetails.polyline];
     }
     
-
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-}
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     
-    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager stopUpdatingLocation];
         [self.locationManager startUpdatingLocation];
-         self.mapView.showsUserLocation = YES;
+        //self.mapView.showsUserLocation = YES;
     }
 }
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    self.mapView.showsUserLocation = YES;
+    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
+    
+}
+
+-(void) show_message{
+    NSString *message = @"You are going in the wrong direction! Please come back.";
+    NSString *cancel = @"Ok";
+    
+    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancel
+                                          otherButtonTitles:nil, nil];
+    [toast show];
+    int duration = 5; // duration in seconds
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [toast dismissWithClickedButtonIndex:0 animated:YES];
+    });
+}
+
+-(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
+    routeLineRenderer.strokeColor = [UIColor blueColor];
+    routeLineRenderer.lineWidth = 3;
+    return routeLineRenderer;
+}
+
+
 /*
 #pragma mark - Navigation
 

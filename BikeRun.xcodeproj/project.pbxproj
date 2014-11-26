@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		831FD5C31A1B84F100D9AAA8 /* rivarolo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 831FD5C21A1B84F100D9AAA8 /* rivarolo.gpx */; };
+		831FD5C61A1BA87C00D9AAA8 /* BRSharedVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 831FD5C51A1BA87C00D9AAA8 /* BRSharedVariables.m */; };
 		8339713419EFFA04007AA32F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8339713319EFFA04007AA32F /* MapKit.framework */; };
 		8339713619EFFA32007AA32F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8339713519EFFA32007AA32F /* CoreLocation.framework */; };
 		8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339713819EFFCC9007AA32F /* BRNavigationViewController.m */; };
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		831FD5C21A1B84F100D9AAA8 /* rivarolo.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = rivarolo.gpx; sourceTree = "<group>"; };
+		831FD5C41A1BA87C00D9AAA8 /* BRSharedVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSharedVariables.h; sourceTree = "<group>"; };
+		831FD5C51A1BA87C00D9AAA8 /* BRSharedVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSharedVariables.m; sourceTree = "<group>"; };
 		8339713319EFFA04007AA32F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8339713519EFFA32007AA32F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8339713719EFFCC9007AA32F /* BRNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRNavigationViewController.h; sourceTree = "<group>"; };
@@ -128,6 +133,9 @@
 		CB40D08719922D5E003DB27F = {
 			isa = PBXGroup;
 			children = (
+				831FD5C41A1BA87C00D9AAA8 /* BRSharedVariables.h */,
+				831FD5C51A1BA87C00D9AAA8 /* BRSharedVariables.m */,
+				831FD5C21A1B84F100D9AAA8 /* rivarolo.gpx */,
 				8B0174F319EDDFC9003488F1 /* bikerun.sqlite */,
 				8B0174F019EDDDCB003488F1 /* DBManager.h */,
 				8B0174F119EDDDCB003488F1 /* DBManager.m */,
@@ -316,6 +324,7 @@
 				CBF4BEF319A4E573005907BF /* sviluppi.txt in Resources */,
 				8B0174F419EDDFC9003488F1 /* bikerun.sqlite in Resources */,
 				CB40D0CA19923447003DB27F /* full_bike_White.jpg in Resources */,
+				831FD5C31A1B84F100D9AAA8 /* rivarolo.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +346,7 @@
 				CB40D0AA19922D5E003DB27F /* BRViewController.m in Sources */,
 				CB40D0A419922D5E003DB27F /* BRAppDelegate.m in Sources */,
 				CB40D0A019922D5E003DB27F /* main.m in Sources */,
+				831FD5C61A1BA87C00D9AAA8 /* BRSharedVariables.m in Sources */,
 				8339713919EFFCC9007AA32F /* BRNavigationViewController.m in Sources */,
 				838D0E2819F952E3005A2A15 /* BRTravellingViewController.m in Sources */,
 				CB04BF9D1A0FDF1800DB8F8B /* BRTourListViewController.m in Sources */,
