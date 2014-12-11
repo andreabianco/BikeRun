@@ -91,6 +91,9 @@ BRSharedVariables *sharedManager;
                 sharedManager = [BRSharedVariables sharedVariablesManager];
                 [sharedManager.destList addObject:routeDetails];//add the current direction to the array of direction to store it
                 ////////////////////////////////////////////
+                int n=rand()%2;
+                NSString* myString = [@(n) stringValue];
+                routeDetails.polyline.title=myString; //this is used to decide the colour of the polyline
                 [self.mapView addOverlay:routeDetails.polyline];
                 self.allSteps = @"";
                 for (int i = 0; i < routeDetails.steps.count; i++) {
@@ -149,10 +152,17 @@ BRSharedVariables *sharedManager;
 }
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if ([routeDetails.polyline.title isEqualToString:@"0"]) {
+        MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
+        routeLineRenderer.strokeColor = [UIColor redColor];
+        routeLineRenderer.lineWidth = 5;
+        return routeLineRenderer;
+    }
     MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
-    routeLineRenderer.strokeColor = [UIColor redColor];
+    routeLineRenderer.strokeColor = [UIColor blackColor];
     routeLineRenderer.lineWidth = 5;
     return routeLineRenderer;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

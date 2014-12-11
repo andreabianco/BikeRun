@@ -8,8 +8,13 @@
 
 #import "BRTravellingViewController.h"
 #import "BRSharedVariables.h"
-@interface BRTravellingViewController ()
+#import "BRMathOperation.h"
 
+@interface BRTravellingViewController ()
+@property int seconds;
+@property float distance;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSMutableArray *locations; //store the percurred way.
 @end
 
 @implementation BRTravellingViewController
@@ -22,8 +27,19 @@ MKRoute *routeDetails;
 //    // Do any additional setup after loading the view.
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //PROVVISORI QUESTI SON DA TOGLIERE NELLA VERSIONE FINALE E INIZIALIZZARE OPPORTUNAMENTE
     sharedManager = [BRSharedVariables sharedVariablesManager];
+    _distance=0;//ora son inizializzati a 0 poi saranno da mettere alla quantità raggiunta
+    _seconds=0;
+    ///////////////////
+    
+    //initialize the timer that call function eachSecond
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
+    
     self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 10; //used to have a good treshold if the person is
     self.locationManager.delegate = self;
     self.mapView.delegate = self;
     CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
@@ -40,13 +56,23 @@ MKRoute *routeDetails;
             [self.locationManager requestAlwaysAuthorization];
         }
        }
+    
+    //print of the guide-line
     NSMutableArray *destinations=sharedManager.destList;
     for (int i=0; i<destinations.count; i++) {
         routeDetails=destinations[i];
+        routeDetails.polyline.title=@"1";
         [self.mapView addOverlay:routeDetails.polyline];
     }
     
 }
+
+- (void) viewWillDisappear:(BOOL)animated //used to stop the timer and update of label if view is dismissed
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -63,8 +89,34 @@ MKRoute *routeDetails;
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     self.mapView.showsUserLocation = YES;
-    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
-    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
+    for (CLLocation *newLocation in locations) {
+        
+        NSDate *eventDate = newLocation.timestamp;
+        
+        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        
+        if (abs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
+            
+            // update distance
+            if (self.locations.count > 0) {
+                self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
+                
+                CLLocationCoordinate2D coords[2];
+                coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
+                coords[1] = newLocation.coordinate;
+                
+                MKCoordinateRegion region =
+                MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
+                [self.mapView setRegion:region animated:YES];
+                
+                [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+            }
+            
+            [self.locations addObject:newLocation];
+        }
+    }
+//    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+//    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
     
 }
 
@@ -86,12 +138,34 @@ MKRoute *routeDetails;
 }
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    //if is guideline paint blu
+    if ([routeDetails.polyline.title isEqualToString:@"1"]) {
+        MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
+        routeLineRenderer.strokeColor = [UIColor blueColor];
+        routeLineRenderer.lineWidth = 3;
+        return routeLineRenderer;
+    }
+    //else is the road that the user is percurring so black print
     MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
-    routeLineRenderer.strokeColor = [UIColor blueColor];
+    routeLineRenderer.strokeColor = [UIColor blackColor];
     routeLineRenderer.lineWidth = 3;
     return routeLineRenderer;
+    
 }
 
+/*! function that update trascurred time and labels on screen*/
+- (void)eachSecond
+{
+    self.seconds++;
+    [self updateLabels];
+}
+
+- (void)updateLabels
+{
+    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [BRMathOperation stringifySecondCount:self.seconds usingLongFormat:NO]];
+    self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [BRMathOperation stringifyDistance:self.distance]];
+    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@",  [BRMathOperation stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+}
 
 /*
 #pragma mark - Navigation
