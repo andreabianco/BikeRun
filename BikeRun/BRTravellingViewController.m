@@ -20,13 +20,12 @@
 @implementation BRTravellingViewController
 
 BRSharedVariables *sharedManager;
+double speed;
 MKRoute *routeDetails;
 
 - (void)viewDidLoad {
    [super viewDidLoad];
 //    // Do any additional setup after loading the view.
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     //PROVVISORI QUESTI SON DA TOGLIERE NELLA VERSIONE FINALE E INIZIALIZZARE OPPORTUNAMENTE
     sharedManager = [BRSharedVariables sharedVariablesManager];
@@ -36,7 +35,7 @@ MKRoute *routeDetails;
     
     //initialize the timer that call function eachSecond
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
-    
+    self.locations=[NSMutableArray array];
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = 10; //used to have a good treshold if the person is
@@ -46,7 +45,7 @@ MKRoute *routeDetails;
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedAlways) {
         [self.locationManager stopUpdatingLocation];
         [self.locationManager startUpdatingLocation];
-        // self.mapView.showsUserLocation = YES;
+         self.mapView.showsUserLocation = YES;
         
     }
     else{
@@ -104,20 +103,19 @@ MKRoute *routeDetails;
                 CLLocationCoordinate2D coords[2];
                 coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
                 coords[1] = newLocation.coordinate;
-                
+                speed=newLocation.speed;
                 MKCoordinateRegion region =
                 MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
                 [self.mapView setRegion:region animated:YES];
                 
                 [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
             }
-            
             [self.locations addObject:newLocation];
         }
     }
 //    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
 //    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
-    
+//    
 }
 
 -(void) show_message{
@@ -139,14 +137,15 @@ MKRoute *routeDetails;
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     //if is guideline paint blu
-    if ([routeDetails.polyline.title isEqualToString:@"1"]) {
+    MKPolyline *polyLine = (MKPolyline *)overlay;
+    MKPolylineRenderer *routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyLine];
+    if ([polyLine.title isEqualToString:@"1"]) {
         MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
         routeLineRenderer.strokeColor = [UIColor blueColor];
         routeLineRenderer.lineWidth = 3;
         return routeLineRenderer;
     }
     //else is the road that the user is percurring so black print
-    MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:routeDetails.polyline];
     routeLineRenderer.strokeColor = [UIColor blackColor];
     routeLineRenderer.lineWidth = 3;
     return routeLineRenderer;
@@ -165,6 +164,7 @@ MKRoute *routeDetails;
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [BRMathOperation stringifySecondCount:self.seconds usingLongFormat:NO]];
     self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [BRMathOperation stringifyDistance:self.distance]];
     self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@",  [BRMathOperation stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+    self.speedLabel.text=[NSString stringWithFormat:@"Speed: %f",speed*3.6];
 }
 
 /*
