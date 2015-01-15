@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Location" representedClassName="Location" syncable="YES">
+        <attribute name="latitudine" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitudine" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="posStep" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="isRun" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Run" inverseName="hasLocations" inverseEntity="Run" syncable="YES"/>
+        <relationship name="isStep" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Step" inverseName="hasLocation" inverseEntity="Step" syncable="YES"/>
+    </entity>
+    <entity name="Run" representedClassName="Run" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="hasLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Location" inverseName="isRun" inverseEntity="Location" syncable="YES"/>
+        <relationship name="isTour" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Tour" inverseName="hasRuns" inverseEntity="Tour" syncable="YES"/>
+    </entity>
+    <entity name="Step" representedClassName="Step" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="hasLocation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="isStep" inverseEntity="Location" syncable="YES"/>
+        <relationship name="isTour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tour" inverseName="hasSteps" inverseEntity="Tour" syncable="YES"/>
+    </entity>
+    <entity name="Tour" representedClassName="Tour" syncable="YES">
+        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasPath" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Run" syncable="YES"/>
+        <relationship name="hasRuns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Run" inverseName="isTour" inverseEntity="Run" syncable="YES"/>
+        <relationship name="hasSteps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Step" inverseName="isTour" inverseEntity="Step" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Location" positionX="457" positionY="-61" width="128" height="118"/>
+        <element name="Run" positionX="252" positionY="110" width="128" height="88"/>
+        <element name="Step" positionX="153" positionY="-124" width="128" height="135"/>
+        <element name="Tour" positionX="-63" positionY="-18" width="128" height="118"/>
+    </elements>
+</model>
