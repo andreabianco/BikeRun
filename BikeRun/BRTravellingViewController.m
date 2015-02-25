@@ -117,6 +117,19 @@ MKRoute *routeDetails;
 //    NSLog(@"%f aaaa %f",self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude);
 //    
 }
+- (void)eachSecond
+{
+    self.seconds++;
+    [self updateLabels];
+}
+
+- (void)updateLabels
+{
+    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [BRMathOperation stringifySecondCount:self.seconds usingLongFormat:NO]];
+    self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [BRMathOperation stringifyDistance:self.distance]];
+    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@",  [BRMathOperation stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+    self.speedLabel.text=[NSString stringWithFormat:@"Speed: %f",speed*3.6];
+}
 
 -(void) show_message{
     NSString *message = @"You are going in the wrong direction! Please come back.";
@@ -150,21 +163,6 @@ MKRoute *routeDetails;
     routeLineRenderer.lineWidth = 3;
     return routeLineRenderer;
     
-}
-
-/*! function that update trascurred time and labels on screen*/
-- (void)eachSecond
-{
-    self.seconds++;
-    [self updateLabels];
-}
-
-- (void)updateLabels
-{
-    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [BRMathOperation stringifySecondCount:self.seconds usingLongFormat:NO]];
-    self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [BRMathOperation stringifyDistance:self.distance]];
-    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@",  [BRMathOperation stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
-    self.speedLabel.text=[NSString stringWithFormat:@"Speed: %f",speed*3.6];
 }
 
 /*
